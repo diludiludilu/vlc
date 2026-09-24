@@ -25,6 +25,7 @@ import {
   Moon,
   Clock,
   Check,
+  Smartphone,
 } from 'lucide-react';
 
 export const Controls: React.FC = () => {
@@ -66,6 +67,7 @@ export const Controls: React.FC = () => {
     isPlaylistOpen,
     togglePlaylist,
     theme,
+    setIsMobileView,
   } = usePlayer();
 
   const [showRemainingTime, setShowRemainingTime] = useState<boolean>(false);
@@ -468,6 +470,15 @@ export const Controls: React.FC = () => {
             className="p-1.5 rounded-lg hover:bg-white/10 text-zinc-400 hover:text-white transition"
           >
             {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+          </button>
+
+          {/* Switch to Mobile UI */}
+          <button
+            onClick={() => setIsMobileView(true)}
+            title="Switch to Mobile UI"
+            className="p-1.5 rounded-lg hover:bg-white/10 text-zinc-400 hover:text-amber-400 transition"
+          >
+            <Smartphone className="w-4 h-4" />
           </button>
         </div>
       </div>

@@ -26,6 +26,7 @@ import {
   Moon,
   Sun,
   Zap,
+  Smartphone,
 } from 'lucide-react';
 import { ThemeMode } from '../types/player';
 
@@ -88,6 +89,7 @@ export const MenuBar: React.FC = () => {
     setAbPointA,
     setAbPointB,
     clearAbRepeat,
+    setIsMobileView,
   } = usePlayer();
 
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -440,6 +442,12 @@ export const MenuBar: React.FC = () => {
           action: () => setTheme('cinema-black'),
           checked: theme === 'cinema-black',
         },
+        { type: 'separator' },
+        {
+          label: 'Switch to Mobile UI',
+          action: () => setIsMobileView(true),
+          icon: <Smartphone className="w-3.5 h-3.5 text-amber-400" />,
+        },
       ],
     },
     {
@@ -655,6 +663,16 @@ export const MenuBar: React.FC = () => {
           className="p-1.5 rounded-md hover:bg-white/10 text-zinc-300 hover:text-amber-400 transition"
         >
           <Palette className="w-3.5 h-3.5" />
+        </button>
+
+        {/* Mobile View Switcher */}
+        <button
+          onClick={() => setIsMobileView(true)}
+          title="Switch to Mobile UI"
+          className="px-2 py-1 rounded-md bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-amber-400 flex items-center gap-1.5 transition text-xs font-medium"
+        >
+          <Smartphone className="w-3.5 h-3.5 text-amber-400" />
+          <span className="hidden sm:inline">Mobile UI</span>
         </button>
       </div>
     </div>

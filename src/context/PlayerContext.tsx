@@ -19,6 +19,7 @@ import {
   AudioEnhancements,
   AmbientSettings,
   VisualizerMode,
+  MobileTab,
 } from '../types/player';
 import {
   DEFAULT_PLAYLIST,
@@ -144,6 +145,15 @@ interface PlayerContextType {
   // On-Screen Display (OSD) feedback
   osdMessage: string | null;
   showOsd: (msg: string) => void;
+
+  // Mobile Support
+  isMobileView: boolean;
+  setIsMobileView: React.Dispatch<React.SetStateAction<boolean>>;
+  activeMobileTab: MobileTab;
+  setActiveMobileTab: (tab: MobileTab) => void;
+  isScreenLocked: boolean;
+  setIsScreenLocked: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleScreenLock: () => void;
 }
 
 const defaultVideoSettings: VideoSettings = {
@@ -253,6 +263,27 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [osdMessage, setOsdMessage] = useState<string | null>(null);
 
+  // Mobile State
+  const [isMobileView, setIsMobileView] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+  const [activeMobileTab, setActiveMobileTab] = useState<MobileTab>('player');
+  const [isScreenLocked, setIsScreenLocked] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Auto-detect mobile size if user hasn't explicitly set a preference
+      if (window.innerWidth < 768 && !isMobileView) {
+        setIsMobileView(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileView]);
+
   const osdTimerRef = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -279,6 +310,14 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setOsdMessage(null);
     }, 1800);
   }, []);
+
+  const toggleScreenLock = useCallback(() => {
+    setIsScreenLocked((prev) => {
+      const next = !prev;
+      showOsd(next ? 'Screen Locked' : 'Screen Unlocked');
+      return next;
+    });
+  }, [showOsd]);
 
   // Initialize Web Audio API on first user interaction or mount
   const initWebAudio = useCallback(() => {
@@ -1422,6 +1461,14 @@ export const PlayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
         osdMessage,
         showOsd,
+
+        isMobileView,
+        setIsMobileView,
+        activeMobileTab,
+        setActiveMobileTab,
+        isScreenLocked,
+        setIsScreenLocked,
+        toggleScreenLock,
       }}
     >
       <div

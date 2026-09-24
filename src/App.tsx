@@ -4,6 +4,7 @@ import { MenuBar } from './components/MenuBar';
 import { VideoPlayer } from './components/VideoPlayer';
 import { Controls } from './components/Controls';
 import { Playlist } from './components/Playlist';
+import { MobileView } from './components/mobile/MobileView';
 import { EffectsModal } from './components/EffectsModal';
 import { MediaInfoModal } from './components/MediaInfoModal';
 import { NetworkStreamModal } from './components/NetworkStreamModal';
@@ -14,7 +15,33 @@ import { SnapshotsModal } from './components/SnapshotsModal';
 import { SleepTimerModal } from './components/SleepTimerModal';
 
 const AppContent: React.FC = () => {
-  const { isTheaterMode, theme } = usePlayer();
+  const { isTheaterMode, theme, isMobileView } = usePlayer();
+
+  if (isMobileView) {
+    return (
+      <div
+        className={`flex-1 flex flex-col h-[100dvh] w-full overflow-hidden ${
+          theme === 'vlc-classic'
+            ? 'bg-zinc-950 text-zinc-100 font-sans'
+            : theme === 'dark-slate'
+            ? 'bg-slate-950 text-slate-100 font-sans'
+            : 'bg-black text-white font-sans'
+        }`}
+      >
+        <MobileView />
+
+        {/* Global Modals (accessible on both Mobile & Desktop) */}
+        <EffectsModal />
+        <MediaInfoModal />
+        <NetworkStreamModal />
+        <ShortcutsModal />
+        <AboutModal />
+        <BookmarksModal />
+        <SnapshotsModal />
+        <SleepTimerModal />
+      </div>
+    );
+  }
 
   return (
     <div

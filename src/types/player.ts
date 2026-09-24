@@ -101,3 +101,5 @@ export type ActiveModal =
   | null;
 
 export type ThemeMode = 'vlc-classic' | 'dark-slate' | 'cinema-black';
+
+export type MobileTab = 'player' | 'library' | 'equalizer' | 'tools';
