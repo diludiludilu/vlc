@@ -1,0 +1,6 @@
+{
+  "name": "VLC Web Media Player",
+  "description": "A feature-rich web media player inspired by VLC, featuring audio/video playback, 10-band equalizer, video filters, subtitle sync, A-B repeat, snapshot capture, volume boost up to 200%, and playlist management.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
