@@ -98,6 +98,7 @@ export type ActiveModal =
   | 'bookmarks'
   | 'snapshots'
   | 'sleep-timer'
+  | 'install'
   | null;
 
 export type ThemeMode = 'vlc-classic' | 'dark-slate' | 'cinema-black';

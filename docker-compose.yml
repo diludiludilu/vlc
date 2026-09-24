@@ -1,0 +1,7 @@
+services:
+  vlc-web:
+    build: .
+    container_name: vlc-web-player
+    ports:
+      - "3000:80"
+    restart: unless-stopped

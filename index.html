@@ -13,6 +13,8 @@
     <meta name="description" content="A feature-rich web media player inspired by VLC, featuring audio/video playback, 10-band equalizer, video filters, subtitle sync, A-B repeat, snapshot capture, volume boost up to 200%, and playlist management." />
     <meta property="og:title" content="VLC Web Media Player" />
     <meta property="og:description" content="A feature-rich web media player inspired by VLC, featuring audio/video playback, 10-band equalizer, video filters, subtitle sync, A-B repeat, snapshot capture, volume boost up to 200%, and playlist management." />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,5 +22,14 @@
   <body class="bg-zinc-950 text-zinc-100 select-none antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').catch(function(err) {
+            console.debug('ServiceWorker registration failed:', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

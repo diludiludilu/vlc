@@ -1,0 +1,21 @@
+{
+  "name": "VLC Web Media Player",
+  "short_name": "VLC Web",
+  "description": "A feature-rich web media player inspired by VLC, featuring audio/video playback, 10-band equalizer, video filters, and playlist management.",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#ff8800",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["multimedia", "music", "video", "entertainment"]
+}

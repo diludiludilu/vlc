@@ -14,6 +14,7 @@ import {
   Monitor,
   Check,
   Tv,
+  Download,
 } from 'lucide-react';
 import { ThemeMode } from '../../types/player';
 
@@ -302,6 +303,25 @@ export const MobileTools: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* Install VLC Player App Card */}
+        <button
+          onClick={() => setActiveModal('install')}
+          className="w-full min-h-[48px] p-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent border border-amber-500/30 text-amber-400 flex items-center justify-between shadow-lg active:scale-[0.99] transition"
+        >
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-xl bg-amber-500/20 border border-amber-500/30">
+              <Download className="w-4 h-4 text-amber-400" />
+            </div>
+            <div className="text-left">
+              <span className="text-xs font-bold text-white block">Install VLC Player App</span>
+              <span className="text-[10px] text-zinc-400 block">Add to Home Screen / Desktop PWA</span>
+            </div>
+          </div>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500 text-zinc-950 font-bold">
+            Install
+          </span>
+        </button>
 
         {/* 7. Information & Desktop Switcher */}
         <div className="space-y-2 pt-1">

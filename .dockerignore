@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.github
+*.log
+autotools
+contrib
+buildsystem
+extras
+modules
+test
+share
+include
+doc

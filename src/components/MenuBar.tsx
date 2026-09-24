@@ -27,6 +27,7 @@ import {
   Sun,
   Zap,
   Smartphone,
+  Download,
 } from 'lucide-react';
 import { ThemeMode } from '../types/player';
 
@@ -454,6 +455,12 @@ export const MenuBar: React.FC = () => {
       name: 'Help',
       items: [
         {
+          label: 'Install VLC Web Player...',
+          action: () => setActiveModal('install'),
+          icon: <Download className="w-3.5 h-3.5 text-amber-400" />,
+        },
+        { type: 'separator' },
+        {
           label: 'Keyboard Shortcuts Reference',
           action: () => setActiveModal('shortcuts'),
           icon: <Keyboard className="w-3.5 h-3.5" />,
@@ -663,6 +670,16 @@ export const MenuBar: React.FC = () => {
           className="p-1.5 rounded-md hover:bg-white/10 text-zinc-300 hover:text-amber-400 transition"
         >
           <Palette className="w-3.5 h-3.5" />
+        </button>
+
+        {/* Install App Quick Action */}
+        <button
+          onClick={() => setActiveModal('install')}
+          title="Install VLC Web Player (Desktop / Mobile)"
+          className="px-2 py-1 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center gap-1.5 transition text-xs font-medium"
+        >
+          <Download className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+          <span className="hidden md:inline">Install</span>
         </button>
 
         {/* Mobile View Switcher */}

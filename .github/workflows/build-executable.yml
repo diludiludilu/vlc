@@ -1,0 +1,67 @@
+name: Build VLC Windows Executable
+
+on:
+  push:
+    branches: [ master, main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Generate Icon
+        run: powershell -ExecutionPolicy Bypass -File build-icon.ps1
+
+      - name: Package Embedded Assets
+        run: Compress-Archive -Path dist\* -DestinationPath dist.zip -Force
+
+      - name: Compile Standalone vlc.exe
+        run: |
+          & "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /target:winexe /optimize+ /out:vlc.exe /win32icon:vlc.ico /resource:dist.zip,dist.zip /resource:vlc.ico,vlc.ico /reference:System.dll,System.Windows.Forms.dll,System.Drawing.dll,System.Core.dll,Microsoft.CSharp.dll,System.IO.Compression.FileSystem.dll src-launcher\Program.cs
+
+      - name: Create Portable Release Archive
+        run: |
+          mkdir release-package
+          Copy-Item vlc.exe release-package\
+          Copy-Item vlc.ico release-package\
+          Copy-Item -Recurse dist release-package\dist
+          Copy-Item README.md release-package\
+          Copy-Item INSTALL.md release-package\
+          Compress-Archive -Path release-package\* -DestinationPath vlc-windows-x64.zip
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vlc-windows-executable
+          path: |
+            vlc.exe
+            vlc-windows-x64.zip
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            vlc.exe
+            vlc-windows-x64.zip
+          draft: false
+          prerelease: false
+          generate_release_notes: true

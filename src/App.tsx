@@ -13,6 +13,7 @@ import { AboutModal } from './components/AboutModal';
 import { BookmarksModal } from './components/BookmarksModal';
 import { SnapshotsModal } from './components/SnapshotsModal';
 import { SleepTimerModal } from './components/SleepTimerModal';
+import { InstallModal } from './components/InstallModal';
 
 const AppContent: React.FC = () => {
   const { isTheaterMode, theme, isMobileView } = usePlayer();
@@ -39,6 +40,7 @@ const AppContent: React.FC = () => {
         <BookmarksModal />
         <SnapshotsModal />
         <SleepTimerModal />
+        <InstallModal />
       </div>
     );
   }
@@ -74,6 +76,7 @@ const AppContent: React.FC = () => {
       <BookmarksModal />
       <SnapshotsModal />
       <SleepTimerModal />
+      <InstallModal />
     </div>
   );
 };

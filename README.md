@@ -1,4 +1,56 @@
-# VLC media player
+# VLC Web Media Player
+
+A feature-rich modern web media player inspired by VLC, featuring audio/video playback, 10-band graphic equalizer, real-time video filters & effects, subtitle sync, A-B loop repeat, snapshot capture, volume boost up to 200%, responsive mobile layout, and PWA installation.
+
+---
+
+## ⚡ Quick Start & Software Installation
+
+### 🚀 Option 1: Standalone Windows Executable (`vlc.exe`) — Easiest & Recommended
+> **Zero installation, zero dependencies!** No Node.js or terminal required.
+
+1. **Run directly:** Double-click [`vlc.exe`](file:///c:/Users/ASUS/Documents/University/personal/vlc%20app%20modification/vlc/vlc.exe) in the repository root.
+2. The player will launch instantly in its own dedicated, frameless desktop application window with authentic VLC cone icon and system tray management.
+3. **Desktop Shortcut:**
+   - Run `vlc.exe --install` in Command Prompt / PowerShell, OR
+   - Right-click the VLC tray icon and select **"Create Desktop Shortcut"**.
+4. **Rebuilding `vlc.exe` (Developers):**
+   - Double-click [`build-exe.bat`](file:///c:/Users/ASUS/Documents/University/personal/vlc%20app%20modification/vlc/build-exe.bat) or run `npm run build:exe`.
+
+---
+
+### 🪟 Option 2: Windows 1-Click Batch & PowerShell Scripts
+- **Double-click [`start.bat`](file:///c:/Users/ASUS/Documents/University/personal/vlc%20app%20modification/vlc/start.bat)**: Automatically starts the server and opens `http://localhost:3000` in your browser.
+- **Double-click [`install.bat`](file:///c:/Users/ASUS/Documents/University/personal/vlc%20app%20modification/vlc/install.bat)**: Checks for Node.js, installs dependencies, and configures `.env`.
+- **PowerShell (`.\setup.ps1`)**: Guided setup with automatic Desktop shortcut creation.
+
+---
+
+### 🍎 Option 3: macOS & 🐧 Linux (1-Command)
+```bash
+chmod +x install.sh start.sh && ./install.sh
+# To start anytime:
+./start.sh
+```
+
+---
+
+### 📱 Option 4: 1-Click App Installation (PWA)
+Open `http://localhost:3000` in Chrome, Edge, Safari, or Mobile and click **"Install"** in the top bar to install VLC Web Player as a native desktop or mobile app with its own home screen / start menu icon.
+
+---
+
+### 🐳 Option 5: Docker (Zero Dependencies)
+```bash
+docker compose up -d
+```
+Visit `http://localhost:3000`.
+
+> 📖 For full instructions and troubleshooting, see the [Installation Guide (INSTALL.md)](INSTALL.md).
+
+---
+
+# VLC Media Player (Core / Upstream Engine)
 
 **VLC** is a libre and open source **media player** and **multimedia engine**,
 focused on **playing everything**, and **running everywhere**.
